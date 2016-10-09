@@ -1,10 +1,11 @@
+//Use it in Scripted Post Functions with labels custom field
 import com.atlassian.jira.issue.Issue
 import com.atlassian.jira.ComponentManager
 import com.atlassian.jira.security.groups.GroupManager
 import com.atlassian.jira.issue.label.LabelManager
 
 
-def customFieldId = 13501L
+def customFieldId = 13501L //your labels custom field id
 def groupName = "Group Name"
 def customFieldBusinessValue = ["Business"] as Set<String>
 def customFieldDvhbValue = ["Internal"] as Set<String>
