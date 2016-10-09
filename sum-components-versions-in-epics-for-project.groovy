@@ -26,7 +26,7 @@ log.setLevel(Level.DEBUG)
 
 // Utility functions
 def epicForIssue = { Issue issue ->
-    def epicLinkID = 'customfield_10007'
+    def epicLinkID = 'customfield_10007' //Component/s field id
     CustomField epicLinkField = ComponentAccessor.getCustomFieldManager().getCustomFieldObject(epicLinkID)
     MutableIssue epic = issue.getCustomFieldValue(epicLinkField) as MutableIssue
     return epic
@@ -60,7 +60,7 @@ def updateEpicAndReindex = { MutableIssue epic, Collection<ProjectComponent> com
     epic.setComponent(components)
     epic.setFixVersions(versions)
 
-    issueManager.updateIssue(userManager.getUserByName("amu"), epic, EventDispatchOption.ISSUE_UPDATED, false)
+    issueManager.updateIssue(userManager.getUserByName("username"), epic, EventDispatchOption.ISSUE_UPDATED, false) //JIRA username that should run this script
     issueIndexingService.reIndex(epic)
 }
 
