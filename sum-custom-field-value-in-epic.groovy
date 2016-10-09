@@ -1,3 +1,4 @@
+//Use with Scripted Fields
 import com.atlassian.jira.component.ComponentAccessor;
 
 import org.apache.log4j.Logger
@@ -13,7 +14,7 @@ def sum = 0
 issueLinkManager.getOutwardLinks(issue.id)?.each { issueLink ->
 	//log.debug(issueLink.getDestinationObject().getKey())
     if (issueLink.issueLinkType.name == "Epic-Story Link") {
-        customField = ComponentAccessor.getCustomFieldManager().getCustomFieldObjectByName("Business Value")
+        customField = ComponentAccessor.getCustomFieldManager().getCustomFieldObjectByName("Business Value") //Name of custom field
 		def value = issueLink.getDestinationObject().getCustomFieldValue(customField)
         def intValue = value?.toString()?.toInteger() ?: 0
         sum += intValue
