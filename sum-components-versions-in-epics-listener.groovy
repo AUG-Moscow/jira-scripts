@@ -19,7 +19,7 @@ log.setLevel(Level.DEBUG)
 
 // Utility functions
 def epicForIssue = { Issue issue ->
-    def epicLinkID = 'customfield_10007'
+    def epicLinkID = 'customfield_10007' //id of Component/s field
     CustomField epicLinkField = ComponentAccessor.getCustomFieldManager().getCustomFieldObject(epicLinkID)
     MutableIssue epic = issue.getCustomFieldValue(epicLinkField) as MutableIssue
     return epic
@@ -53,7 +53,7 @@ def updateEpicAndReindex = { MutableIssue epic, Collection<ProjectComponent> com
     epic.setComponent(components)
     epic.setFixVersions(versions)
 
-    issueManager.updateIssue(userManager.getUserByName("amu"), epic, EventDispatchOption.ISSUE_UPDATED, false)
+    issueManager.updateIssue(userManager.getUserByName("username"), epic, EventDispatchOption.ISSUE_UPDATED, false) //enter JIRA username that should run this csript
     issueIndexingService.reIndex(epic)
 }
 
@@ -76,7 +76,7 @@ def setComponentsAndVersionsOfIssuesToEpic = { MutableIssue epic ->
 }
 
 // Fetch epic
-MutableIssue issue = ComponentAccessor.getIssueManager().getIssueObject("SKP-273")
+//MutableIssue issue = ComponentAccessor.getIssueManager().getIssueObject("KEY-123") //testing in one Epic
 MutableIssue epic = epicForIssue(issue)
 
 // --- Logic ----
@@ -85,7 +85,7 @@ setComponentsAndVersionsOfIssuesToEpic(epic)
 
 
 
-
+// --- Debug ----
 //customFieldManager.getCustomFieldObjects(epic).collect { log.debug("ID: " + it.id + " Name: " + it.name ) }
 //
 
