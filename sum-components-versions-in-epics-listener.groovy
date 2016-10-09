@@ -1,3 +1,4 @@
+//Use in Script Listeners with Issue Updated Event
 import com.atlassian.jira.bc.project.component.ProjectComponent
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.event.type.EventDispatchOption
@@ -53,7 +54,7 @@ def updateEpicAndReindex = { MutableIssue epic, Collection<ProjectComponent> com
     epic.setComponent(components)
     epic.setFixVersions(versions)
 
-    issueManager.updateIssue(userManager.getUserByName("username"), epic, EventDispatchOption.ISSUE_UPDATED, false) //enter JIRA username that should run this csript
+    issueManager.updateIssue(userManager.getUserByName("username"), epic, EventDispatchOption.ISSUE_UPDATED, false) //enter JIRA username that should run this script
     issueIndexingService.reIndex(epic)
 }
 
