@@ -107,7 +107,7 @@ def epicsForProject = { Project project ->
 }
 
 // Logic
-Project project = projectForKey("FADM")
+Project project = projectForKey("PROJECTKEY") // Project key
 Collection<MutableIssue> epics = epicsForProject(project)
 epics.collect(setComponentsAndVersionsOfIssuesToEpic)
 // ---
