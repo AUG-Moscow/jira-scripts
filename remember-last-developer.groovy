@@ -1,4 +1,3 @@
-//Remembers last developer worked with the issue. Use in scripting field
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.changehistory.ChangeHistory
 import com.atlassian.jira.issue.history.ChangeItemBean
@@ -15,11 +14,11 @@ def lastChangeId
 def changes = changeHistoryManager.getChangeHistories(issue)
 
 changes.eachWithIndex {
-    ChangeHistory change, changeId - >
+    ChangeHistory change, changeId ->
         def properties = change.getChangeItemBeans()
     properties.each {
-        ChangeItemBean property - >
-            if (property.getField() == «status» && (property.fromString == «In progress» || property.fromString == «2. В работе»)) {
+        ChangeItemBean property ->
+            if (property.getField() == "status" && (property.fromString == "In Progress" || property.fromString == "Design")) {
                 changedFromInProgrees.push(change);
                 changedFromInProgreesId.push(changeId);
                 lastChangeId = changeId;
@@ -28,13 +27,13 @@ changes.eachWithIndex {
 }
 if (changedFromInProgreesId != []) {
     changes.eachWithIndex {
-        ChangeHistory change, changeId - >
+        ChangeHistory change, changeId ->
             def properties = change.getChangeItemBeans()
         properties.each {
-            ChangeItemBean property - >
+            ChangeItemBean property ->
                 if (statusFound == 0) {
                     if (changeId >= lastChangeId) {
-                        if (property.getField() == «assignee») {
+                        if (property.getField() == "assignee") {
                             user_from = property.from;
                             user_to = property.to;
                             def mrBean = property;
